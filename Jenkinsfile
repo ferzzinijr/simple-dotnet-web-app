@@ -27,5 +27,11 @@ pipeline {
                 }
             }
         }
+        stage('Run') {
+            steps {
+                // Rodar a aplicação publicada na pasta 'published'
+                sh 'dotnet published/SimpleWebApi.dll --urls=http://0.0.0.0:5000 &'
+            }
+        }
     }
 }
