@@ -1,13 +1,16 @@
 pipeline {
-    agent any 
+    agent any
+    options {
+        skipStagesAfterUnstable()
+    }
     stages {
-        stage('Build') { 
+        stage('Build') {
             steps {
-                sh 'dotnet restore' 
-                sh 'dotnet build --no-restore' 
+                sh 'dotnet restore'
+                sh 'dotnet build --no-restore'
             }
         }
-        stage('Test') { 
+        stage('Test') {
             steps {
                 sh 'dotnet test --no-build --no-restore --collect "XPlat Code Coverage"'
             }
@@ -19,18 +22,12 @@ pipeline {
         }
         stage('Deliver') { 
             steps {
-                sh 'dotnet publish SimpleWebApi --no-restore -o published' 
+                sh 'dotnet publish SimpleWebApi --no-restore -o published'  
             }
             post {
                 success {
-                    archiveArtifacts 'published/*.*'
+                    archiveArtifacts 'published/*.*' 
                 }
-            }
-        }
-        stage('Run') {
-            steps {
-                // Rodar a aplicação publicada na pasta 'published'
-                sh 'dotnet published/SimpleWebApi.dll --urls=http://0.0.0.0:5000 &'
             }
         }
     }
