@@ -24,7 +24,7 @@ public class WebApiTest : IClassFixture<WebApplicationFactory<Program>>
         // Assert
         response.EnsureSuccessStatusCode(); // Status Code 200-299
         Assert.Equal("application/json; charset=utf-8", 
-            "xD");
+            response.Content.Headers.ContentType.ToString());
     }
 
     [Fact]
