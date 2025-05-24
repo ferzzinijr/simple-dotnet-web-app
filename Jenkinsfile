@@ -30,5 +30,12 @@ pipeline {
                 }
             }
         }
+        stage('Run') {
+            steps {
+                // Executa o app usando dotnet run
+                sh 'dotnet run --project SimpleWebApi'
+            }
+        }
+
     }
 }
