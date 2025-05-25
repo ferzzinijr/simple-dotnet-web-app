@@ -33,9 +33,9 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast")
 .WithOpenApi();
 
-app.MapGet("/testjenkins", () => new { message = "Endpoint do Jenkins funcionando!" })
-   .WithName("testjenkins")
-   .WithOpenApi();
+//app.MapGet("/testjenkins", () => new { message = "Endpoint do Jenkins funcionando!" })
+//   .WithName("testjenkins")
+//   .WithOpenApi();
 
 app.Run();
 
